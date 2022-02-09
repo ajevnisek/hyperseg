@@ -2,13 +2,13 @@ import os
 import inspect
 from functools import partial
 import torch.optim as optim
-from hyperseg.utils.polylr import PolyLR
-from hyperseg.datasets.voc_sbd import VOCSBDDataset
-from hyperseg.datasets.seg_transforms import RandomHorizontalFlip, ConstantPad, RandomResize, RandomRotation, \
+from utils.polylr import PolyLR
+from datasets.voc_sbd import VOCSBDDataset
+from datasets.seg_transforms import RandomHorizontalFlip, ConstantPad, RandomResize, RandomRotation, \
     ToTensor, Normalize
 from torchvision.transforms import ColorJitter
-from hyperseg.models.hyperseg_v0_1 import hyperseg_efficientnet
-from hyperseg.train import main
+from models.hyperseg_v0_1 import hyperseg_efficientnet
+from train import main
 
 
 if __name__ == '__main__':

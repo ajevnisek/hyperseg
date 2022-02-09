@@ -1,9 +1,9 @@
 import os
 import inspect
 from functools import partial
-from hyperseg.datasets.camvid import CamVidDataset
+from datasets.camvid import CamVidDataset
 from torchvision.transforms import Resize
-from hyperseg.test import main
+from test import main
 
 
 if __name__ == '__main__':

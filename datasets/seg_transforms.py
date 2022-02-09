@@ -29,12 +29,18 @@ class InterpolationMode(Enum):
 # Borrowed from: https://github.com/pytorch/vision/blob/v0.9.1/torchvision/transforms/functional.py
 def _interpolation_modes_from_int(i: int) -> InterpolationMode:
     inverse_modes_mapping = {
-        0: InterpolationMode.NEAREST,
-        2: InterpolationMode.BILINEAR,
-        3: InterpolationMode.BICUBIC,
-        4: InterpolationMode.BOX,
-        5: InterpolationMode.HAMMING,
-        1: InterpolationMode.LANCZOS,
+        # 0: InterpolationMode.NEAREST,
+        # 2: InterpolationMode.BILINEAR,
+        # 3: InterpolationMode.BICUBIC,
+        # 4: InterpolationMode.BOX,
+        # 5: InterpolationMode.HAMMING,
+        # 1: InterpolationMode.LANCZOS,
+        0: Image.NEAREST,
+        2: Image.BILINEAR,
+        3: Image.BICUBIC,
+        4: Image.BOX,
+        5: Image.HAMMING,
+        1: Image.LANCZOS,
     }
     return inverse_modes_mapping[i]
 
@@ -188,6 +194,15 @@ class LargerEdgeResize(SegTransform, transforms.Resize):
 
     def __init__(self, size, interpolation=Image.BICUBIC):
         super(LargerEdgeResize, self).__init__(size, interpolation)
+        if str(self.interpolation).startswith('InterpolationMode'):
+            self.interpolation = {
+                'InterpolationMode.NEAREST': Image.NEAREST,
+                'InterpolationMode.BILINEAR': Image.BILINEAR,
+                'InterpolationMode.BICUBIC': Image.BICUBIC,
+                'InterpolationMode.BOX': Image.BOX,
+                'InterpolationMode.HAMMING': Image.HAMMING,
+                'InterpolationMode.LANCZOS': Image.LANCZOS,
+            }[str(self.interpolation)]
 
     def __call__(self, img, lbl):
         """
@@ -513,9 +528,9 @@ class UpDownPyramids(Pyramids):
 
 
 def main(input, label, img_transforms=None, tensor_transforms=None):
-    from hyperseg.utils.obj_factory import obj_factory
-    from hyperseg.utils.img_utils import tensor2rgb
-    from hyperseg.datasets.seg_transforms import Compose
+    from utils.obj_factory import obj_factory
+    from utils.img_utils import tensor2rgb
+    from datasets.seg_transforms import Compose
     from PIL import Image
 
     # Initialize transforms

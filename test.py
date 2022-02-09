@@ -14,12 +14,12 @@ import numpy as np
 from PIL import Image
 from tqdm import tqdm
 from matplotlib import pyplot as plt
-from hyperseg.datasets.seg_transforms import Compose
-from hyperseg.utils.utils import set_device, load_model
-from hyperseg.utils.obj_factory import obj_factory
-from hyperseg.utils.seg_utils import blend_seg, ConfusionMatrix
-from hyperseg.utils.utils import remove_data_parallel_from_state_dict
-from hyperseg.utils.img_utils import make_grid, tensor2rgb
+from datasets.seg_transforms import Compose
+from utils.utils import set_device, load_model
+from utils.obj_factory import obj_factory
+from utils.seg_utils import blend_seg, ConfusionMatrix
+from utils.utils import remove_data_parallel_from_state_dict
+from utils.img_utils import make_grid, tensor2rgb
 
 
 parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)

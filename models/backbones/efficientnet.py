@@ -10,7 +10,7 @@ import numpy as np
 import torch
 from torch import nn
 from torch.nn import functional as F
-from hyperseg.models.backbones.efficientnet_utils import (
+from models.backbones.efficientnet_utils import (
     round_filters,
     round_repeats,
     drop_connect,
@@ -491,7 +491,7 @@ class EfficientNet(nn.Module):
 
 
 def efficientnet(model_name, pretrained=False, head=nn.Linear, **kwargs):
-    from hyperseg.utils.obj_factory import partial_obj_factory
+    from utils.obj_factory import partial_obj_factory
 
     head = partial_obj_factory(head) if head is not None else None
     if pretrained:
@@ -504,8 +504,8 @@ def efficientnet(model_name, pretrained=False, head=nn.Linear, **kwargs):
 
 def main(model="efficientnet_custom_02_scales.efficientnet('efficientnet-b0')", res=256):
     import torch
-    from hyperseg.utils.obj_factory import obj_factory
-    from hyperseg.utils.utils import set_device
+    from utils.obj_factory import obj_factory
+    from utils.utils import set_device
 
     device, gpus = set_device()
     model = obj_factory(model).to(device)

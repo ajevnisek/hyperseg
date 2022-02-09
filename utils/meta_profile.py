@@ -3,7 +3,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from hyperseg.utils.profile import register_hooks as base_register_hooks, shape2str, prRed, module2str, hook_wrapper, \
+from utils.profile import register_hooks as base_register_hooks, shape2str, prRed, module2str, hook_wrapper, \
     count_parameters
 
 
@@ -153,8 +153,8 @@ def count_meta_parameters(m, x=None, y=None):
 ##########################################################################
 # Meta modules hooks
 ##########################################################################
-from hyperseg.models.layers.meta_conv import MetaConv2d
-from hyperseg.models.layers.meta_patch import MetaPatchConv2d
+from models.layers.meta_conv import MetaConv2d
+from models.layers.meta_patch import MetaPatchConv2d
 
 
 def count_MetaConv2d(m: MetaConv2d, x: (torch.Tensor,), y: torch.Tensor):
@@ -184,9 +184,9 @@ register_hooks = {
 
 
 def main(model, res=(512,), pyramids=None, up_pyramid=False, max_depth=None):
-    from hyperseg.utils.obj_factory import obj_factory
-    from hyperseg.utils.utils import set_device
-    from hyperseg.utils.img_utils import create_pyramid
+    from utils.obj_factory import obj_factory
+    from utils.utils import set_device
+    from utils.img_utils import create_pyramid
 
     assert len(res) <= 2, f'res must be either a single number or a pair of numbers: "{res}"'
     res = res * 2 if len(res) == 1 else res

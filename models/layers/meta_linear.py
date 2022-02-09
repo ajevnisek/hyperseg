@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from hyperseg.models.layers.meta_conv import MetaSequential
+from models.layers.meta_conv import MetaSequential
 
 
 class MetaLinear(nn.Module):
@@ -88,9 +88,9 @@ def make_meta_linear_block(in_features, out_features, bias=False, norm_layer=nn.
     return MetaSequential(*layers)
 
 
-def main(model='hyperseg.models.layers.meta_linear.MetaLinear', in_features=3, out_features=5):
-    from hyperseg.utils.obj_factory import obj_factory
-    from hyperseg.utils.utils import set_device
+def main(model='models.layers.meta_linear.MetaLinear', in_features=3, out_features=5):
+    from utils.obj_factory import obj_factory
+    from utils.utils import set_device
 
     device, gpus = set_device()
     model = obj_factory(model, in_features=in_features, out_features=out_features).to(device)
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-m', '--model', default='hyperseg.models.layers.meta_linear.MetaLinear',
+    parser.add_argument('-m', '--model', default='models.layers.meta_linear.MetaLinear',
                         help='model object')
     parser.add_argument('-if', '--in_features', default=3, type=int,
                         metavar='N', help='number of input features')

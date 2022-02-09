@@ -1,0 +1,3 @@
+python test.py 'checkpoints/camvid/train_camvid_efficientnet_b1_hyperseg-s' \
+-td "hyperseg.datasets.camvid.CamVidDataset('data/camvid',split='val',mode='fine')" \
+-it "seg_transforms.LargerEdgeResize([768,576])"

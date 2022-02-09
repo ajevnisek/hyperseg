@@ -477,7 +477,7 @@ def count_lstm(m: nn.LSTM, x: torch.Tensor, y: torch.Tensor):
 ##########################################################################
 # Efficientnet hooks
 ##########################################################################
-from hyperseg.models.backbones.efficientnet_utils import Conv2dStaticSamePadding, MemoryEfficientSwish
+from models.backbones.efficientnet_utils import Conv2dStaticSamePadding, MemoryEfficientSwish
 
 
 def count_conv2d_static_same_padding(m: Conv2dStaticSamePadding, x: (torch.Tensor,), y: torch.Tensor):
@@ -553,9 +553,9 @@ register_hooks = {
 
 
 def main(model, res=(512,), pyramids=None, max_depth=None):
-    from hyperseg.utils.obj_factory import obj_factory
-    from hyperseg.utils.utils import set_device
-    from hyperseg.utils.img_utils import create_pyramid
+    from utils.obj_factory import obj_factory
+    from utils.utils import set_device
+    from utils.img_utils import create_pyramid
 
     assert len(res) <= 2, f'res must be either a single number or a pair of numbers: "{res}"'
     res = res * 2 if len(res) == 1 else res

@@ -162,11 +162,11 @@ def calc_weights_from_image_classes(image_classes):
     return weights
 
 
-def main(dataset='hyperseg.datasets.voc_sbd.VOCSBDDataset',
+def main(dataset='datasets.voc_sbd.VOCSBDDataset',
          train_img_transforms=None, val_img_transforms=None,
          tensor_transforms=('seg_transforms.ToTensor', 'seg_transforms.Normalize'),
          workers=4, batch_size=4):
-    from hyperseg.utils.obj_factory import obj_factory
+    from utils.obj_factory import obj_factory
 
     dataset = obj_factory(dataset)
     print(len(dataset))
@@ -176,7 +176,7 @@ if __name__ == "__main__":
     # Parse program arguments
     import argparse
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('dataset', metavar='OBJ', default='hyperseg.datasets.voc_sbd.VOCSBDDataset',
+    parser.add_argument('dataset', metavar='OBJ', default='datasets.voc_sbd.VOCSBDDataset',
                         help='dataset object')
     parser.add_argument('-tit', '--train_img_transforms', nargs='+',
                         help='train image transforms')

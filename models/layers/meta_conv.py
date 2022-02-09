@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.modules.utils import _pair
 import numpy as np
-from hyperseg.models.layers.meta_sequential import MetaSequential
+from models.layers.meta_sequential import MetaSequential
 
 
 class MetaConv2d(nn.Module):
@@ -230,7 +230,7 @@ def make_meta_conv2d_block(in_nc, out_nc, kernel_size=3, stride=1, padding=None,
     return MetaSequential(*layers)
 
 
-def main(model='hyperseg.meta_conv.MetaConv2d(3,3,3)', res=(256,)):
+def main(model='meta_conv.MetaConv2d(3,3,3)', res=(256,)):
     hyper_conv = MetaConv2d(3, 3, 3, padding=1, groups=3)
     print(hyper_conv)
     x = torch.ones(4, 3, 64, 64)
@@ -247,7 +247,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser('res_unet test')
-    parser.add_argument('-m', '--model', default='hyperseg.meta_conv.MetaConv2d(3,3,3)',
+    parser.add_argument('-m', '--model', default='meta_conv.MetaConv2d(3,3,3)',
                         help='model object')
     parser.add_argument('-r', '--res', default=(256,), type=int, nargs='+',
                         metavar='N', help='image resolution')

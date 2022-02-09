@@ -1,9 +1,9 @@
 import os
 import inspect
 from functools import partial
-from hyperseg.datasets.cityscapes import CityscapesDataset
+from datasets.cityscapes import CityscapesDataset
 from torchvision.transforms import Resize
-from hyperseg.test import main
+from test import main
 
 
 if __name__ == '__main__':

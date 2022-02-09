@@ -14,7 +14,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 from torch.utils import model_zoo
-from hyperseg.utils.utils import init_weights
+from utils.utils import init_weights
 
 
 ################################################################################

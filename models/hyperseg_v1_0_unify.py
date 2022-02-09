@@ -5,8 +5,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.modules.utils import _pair
-from hyperseg.models.layers.meta_conv import MetaConv2d
-from hyperseg.models.layers.meta_sequential import MetaSequential
+from models.layers.meta_conv import MetaConv2d
+from models.layers.meta_sequential import MetaSequential
 
 
 class HyperGen(nn.Module):
@@ -652,7 +652,7 @@ def divide_feature(in_feature, out_features, min_unit=8):
 
 
 def hyperseg_efficientnet(model_name, pretrained=False, out_feat_scale=0.25, levels=3, weights_path=None, **kwargs):
-    from hyperseg.models.backbones.efficientnet import efficientnet
+    from models.backbones.efficientnet import efficientnet
     from functools import partial
 
     weight_mapper = partial(WeightMapper, levels=levels)
@@ -668,12 +668,12 @@ def hyperseg_efficientnet(model_name, pretrained=False, out_feat_scale=0.25, lev
     return model
 
 
-def main(model='hyperseg.models.hyperseg_v1_0_unify.hyperseg_efficientnet', res=(512,),
+def main(model='models.hyperseg_v1_0_unify.hyperseg_efficientnet', res=(512,),
          pyramids=None,
          train=False):
-    from hyperseg.utils.obj_factory import obj_factory
-    from hyperseg.utils.utils import set_device
-    from hyperseg.utils.img_utils import create_pyramid
+    from utils.obj_factory import obj_factory
+    from utils.utils import set_device
+    from utils.img_utils import create_pyramid
     from tqdm import tqdm
 
     assert len(res) <= 2, f'res must be either a single number or a pair of numbers: "{res}"'
@@ -695,7 +695,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser('hyperseg test')
     parser.add_argument('-m', '--model',
-                        default='hyperseg.models.hyperseg_v1_0_unify.hyperseg_efficientnet',
+                        default='models.hyperseg_v1_0_unify.hyperseg_efficientnet',
                         help='model object')
     parser.add_argument('-r', '--res', default=(512,), type=int, nargs='+',
                         metavar='N', help='image resolution')

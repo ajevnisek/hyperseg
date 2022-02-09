@@ -11,12 +11,12 @@ import torch.nn.functional as F
 from torch.utils.data.dataloader import DataLoader
 from torch.utils.data.sampler import RandomSampler
 from tqdm import tqdm
-from hyperseg.utils.utils import set_device, set_seed, str2int, save_checkpoint, get_arch
-from hyperseg.utils.img_utils import make_grid
-from hyperseg.utils.obj_factory import obj_factory
-from hyperseg.utils.seg_utils import blend_seg
-from hyperseg.datasets.seg_transforms import Compose
-from hyperseg.utils.tensorboard_logger import TensorBoardLogger
+from utils.utils import set_device, set_seed, str2int, save_checkpoint, get_arch
+from utils.img_utils import make_grid
+from utils.obj_factory import obj_factory
+from utils.seg_utils import blend_seg
+from datasets.seg_transforms import Compose
+from utils.tensorboard_logger import TensorBoardLogger
 
 
 parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -69,7 +69,7 @@ training.add_argument('-m', '--model', default='fsgan.models.simple_unet.UNet(n_
                       help='model object')
 training.add_argument('-p', '--pretrained', dest='pretrained', action='store_true',
                       help='use pre-trained model')
-training.add_argument('-be', '--benchmark', default='hyperseg.utils.seg_utils.IOUBenchmark',
+training.add_argument('-be', '--benchmark', default='utils.seg_utils.IOUBenchmark',
                       help='benchmark object')
 training.add_argument('-bs', '--batch_scheduler', action='store_true',
                       help='if True, the learning rate will be scheduled after each batch iteration')

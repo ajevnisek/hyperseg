@@ -2,13 +2,13 @@ import os
 import inspect
 from functools import partial
 import torch.optim as optim
-from hyperseg.utils.polylr import PolyLR
-from hyperseg.datasets.camvid import CamVidDataset
-from hyperseg.datasets.seg_transforms import RandomHorizontalFlip, RandomResize, RandomCrop, ToTensor, Normalize, \
+from utils.polylr import PolyLR
+from datasets.camvid import CamVidDataset
+from datasets.seg_transforms import RandomHorizontalFlip, RandomResize, RandomCrop, ToTensor, Normalize, \
     LargerEdgeResize
-from hyperseg.losses.bootstrapped_ce_loss import BootstrappedCrossEntropyLoss
-from hyperseg.models.hyperseg_v1_0 import hyperseg_efficientnet
-from hyperseg.train import main
+from losses.bootstrapped_ce_loss import BootstrappedCrossEntropyLoss
+from models.hyperseg_v1_0 import hyperseg_efficientnet
+from train import main
 
 
 if __name__ == '__main__':

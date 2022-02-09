@@ -4,8 +4,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from hyperseg.models.layers.meta_sequential import MetaSequential
-from hyperseg.models.layers.meta_patch import MetaPatchConv2d, make_meta_patch_conv2d_block
+from models.layers.meta_sequential import MetaSequential
+from models.layers.meta_patch import MetaPatchConv2d, make_meta_patch_conv2d_block
 
 
 class HyperGen(nn.Module):
@@ -408,7 +408,7 @@ def divide_feature_legacy(in_feature, out_features, min_unit=8):
 
 def hyperseg_efficientnet(model_name, pretrained=False, levels=3, down_groups=1, flat_groups=1, weight_groups=1,
                           avg_pool=True, weights_path=None, **kwargs):
-    from hyperseg.models.backbones.efficientnet import efficientnet
+    from models.backbones.efficientnet import efficientnet
     from functools import partial
 
     weight_mapper = partial(WeightMapper, levels=levels, down_groups=down_groups, flat_groups=flat_groups,
@@ -424,11 +424,11 @@ def hyperseg_efficientnet(model_name, pretrained=False, levels=3, down_groups=1,
     return model
 
 
-def main(model='hyperseg.models.hyperseg_v0_1.hyperseg_efficientnet', res=(512,), pyramids=None,
+def main(model='models.hyperseg_v0_1.hyperseg_efficientnet', res=(512,), pyramids=None,
          train=False):
-    from hyperseg.utils.obj_factory import obj_factory
-    from hyperseg.utils.utils import set_device
-    from hyperseg.utils.img_utils import create_pyramid
+    from utils.obj_factory import obj_factory
+    from utils.utils import set_device
+    from utils.img_utils import create_pyramid
 
     assert len(res) <= 2, f'res must be either a single number or a pair of numbers: "{res}"'
     res = res * 2 if len(res) == 1 else res
@@ -446,7 +446,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser('hyperseg test')
-    parser.add_argument('-m', '--model', default='hyperseg.models.hyperseg_v0_1.hyperseg_efficientnet',
+    parser.add_argument('-m', '--model', default='models.hyperseg_v0_1.hyperseg_efficientnet',
                         help='model object')
     parser.add_argument('-r', '--res', default=(512,), type=int, nargs='+',
                         metavar='N', help='image resolution')

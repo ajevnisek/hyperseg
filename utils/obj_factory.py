@@ -5,21 +5,21 @@ from functools import partial
 
 KNOWN_MODULES = {
     # datasets
-    'opencv_video_seq_dataset': 'hyperseg.datasets.opencv_video_seq_dataset',
-    'img_landmarks_transforms': 'hyperseg.datasets.img_landmarks_transforms',
-    'seg_transforms': 'hyperseg.datasets.seg_transforms',
+    'opencv_video_seq_dataset': 'datasets.opencv_video_seq_dataset',
+    'img_landmarks_transforms': 'datasets.img_landmarks_transforms',
+    'seg_transforms': 'datasets.seg_transforms',
     'transforms': 'torchvision.transforms',
 
     # models
-    'models': 'hyperseg.models',
-    'mobilenet': 'hyperseg.models.mobilenet',
-    'efficientnet': 'hyperseg.models.efficientnet',
-    'efficientnet_custom': 'hyperseg.models.efficientnet_custom',
-    'efficientnet_custom_03': 'hyperseg.models.efficientnet_custom_03',
+    'models': 'models',
+    'mobilenet': 'models.mobilenet',
+    'efficientnet': 'models.efficientnet',
+    'efficientnet_custom': 'models.efficientnet_custom',
+    'efficientnet_custom_03': 'models.efficientnet_custom_03',
 
     # Layers
-    'weight_mapper': 'hyperseg.models.layers.weight_mapper',
-    'weight_mapper_unet': 'hyperseg.models.layers.weight_mapper_unet',
+    'weight_mapper': 'models.layers.weight_mapper',
+    'weight_mapper_unet': 'models.layers.weight_mapper_unet',
 
     # Torch
     'nn': 'torch.nn',
@@ -43,8 +43,8 @@ def obj_factory(obj_exp, *args, **kwargs):
     Objects that are not strings or partials be returned as they are.
 
     Args:
-        obj_exp (str or partial): The object string expresion or partial to be converted into an object. Can also be
-            a sequence of object expressions
+        obj_exp (str or partial): The object string expresion or partial to be
+        converted into an object. Can also be a sequence of object expressions
         *args: Additional arguments to pass to the object
         **kwargs: Additional keyword arguments to pass to the object
 
@@ -77,6 +77,8 @@ def obj_factory(obj_exp, *args, **kwargs):
     # only separate between modules and classes
     module_name, class_name = os.path.splitext(obj_exp)
     class_name = class_name[1:]
+    if module_name.startswith('hyperseg.'):
+        module_name = module_name[len("hyperseg."):]
     module = importlib.import_module(KNOWN_MODULES[module_name] if module_name in KNOWN_MODULES else module_name)
     module_class = getattr(module, class_name)
     class_instance = module_class(*args, **kwargs)

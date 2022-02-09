@@ -1,9 +1,9 @@
 import os
 import inspect
 from functools import partial
-from hyperseg.datasets.voc_sbd import VOCSBDDataset
-from hyperseg.datasets.seg_transforms import ConstantPad, ToTensor, Normalize
-from hyperseg.test import main
+from datasets.voc_sbd import VOCSBDDataset
+from datasets.seg_transforms import ConstantPad, ToTensor, Normalize
+from test import main
 
 
 if __name__ == '__main__':

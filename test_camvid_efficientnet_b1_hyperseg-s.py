@@ -1,7 +1,8 @@
 import os
 import inspect
 from functools import partial
-from datasets.cityscapes import CityscapesDataset
+# from datasets.camvid import CamVidDataset
+from datasets.camvid import CamVidDataset
 from torchvision.transforms import Resize
 from test import main
 
@@ -11,9 +12,9 @@ if __name__ == '__main__':
     exp_name = os.path.splitext(os.path.basename(__file__))[0]  # Make sure the config and model have the same base name
     exp_dir = os.path.join('tests', exp_name)
     model = os.path.join('weights', exp_name + '.pth')
-    data_dir = 'data/cityscapes'    # Download from: https://www.cityscapes-dataset.com
-    test_dataset = partial(CityscapesDataset, data_dir, 'val', 'fine', 'semantic')
-    img_transforms = [Resize([512, 1024])]
+    data_dir = 'data/camvid'    # Download from: https://www.kaggle.com/carlolepelaars/camvid#
+    test_dataset = partial(CamVidDataset, data_dir, 'test')     # 960 x 720
+    img_transforms = [Resize([576, 768])]
 
     os.chdir(project_dir)
     os.makedirs(exp_dir, exist_ok=True)

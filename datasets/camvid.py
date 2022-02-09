@@ -147,11 +147,11 @@ class LabelTensorToPILImage(object):
         return Image.fromarray(npimg, mode=mode)
 
 
-def main(dataset='hyperseg.datasets.camvid.CamVidDataset',
+def main(dataset='datasets.camvid.CamVidDataset',
          train_img_transforms=None, val_img_transforms=None,
          tensor_transforms=('seg_transforms.ToTensor', 'seg_transforms.Normalize'),
          workers=4, batch_size=4):
-    from hyperseg.utils.obj_factory import obj_factory
+    from utils.obj_factory import obj_factory
 
     dataset = obj_factory(dataset)
     for img, target in dataset:
@@ -164,7 +164,7 @@ if __name__ == "__main__":
     # Parse program arguments
     import argparse
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('dataset', metavar='OBJ', default='hyperseg.datasets.camvid.CamVidDataset',
+    parser.add_argument('dataset', metavar='OBJ', default='datasets.camvid.CamVidDataset',
                         help='dataset object')
     parser.add_argument('-tit', '--train_img_transforms', nargs='+',
                         help='train image transforms')

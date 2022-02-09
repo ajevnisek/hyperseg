@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.modules.utils import _pair
-from hyperseg.models.layers.meta_conv import MetaConv2d
-from hyperseg.models.layers.meta_sequential import MetaSequential
+from models.layers.meta_conv import MetaConv2d
+from models.layers.meta_sequential import MetaSequential
 
 
 class MetaPatch(nn.Module):
@@ -257,10 +257,10 @@ def make_meta_patch_conv2d_block(in_nc, out_nc, kernel_size=3, stride=1, padding
     return MetaSequential(*layers)
 
 
-def main(model='hyperseg.models.layers.meta_conv.MetaConv2d(kernel_size=3)', in_channels=10, out_channels=20,
+def main(model='models.layers.meta_conv.MetaConv2d(kernel_size=3)', in_channels=10, out_channels=20,
          padding=0, test_fps=False):
-    from hyperseg.utils.obj_factory import obj_factory
-    from hyperseg.utils.utils import set_device
+    from utils.obj_factory import obj_factory
+    from utils.utils import set_device
     import time
     from tqdm import tqdm
 
@@ -302,7 +302,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-m', '--model', default='hyperseg.models.layers.meta_conv.MetaConv2d(kernel_size=3)',
+    parser.add_argument('-m', '--model', default='models.layers.meta_conv.MetaConv2d(kernel_size=3)',
                         help='model object')
     parser.add_argument('-ic', '--in_channels', default=10, type=int,
                         metavar='N', help='number of input features')

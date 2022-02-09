@@ -24,7 +24,7 @@ if __name__ == '__main__':
     tensor_transforms = [ToTensor(), Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])]
     epochs = 120
     train_iterations = 2000
-    batch_size = 16
+    batch_size = 8
     workers = 16
     pretrained = True
     optimizer = partial(optim.Adam, lr=1e-3, betas=(0.5, 0.999))
@@ -32,14 +32,18 @@ if __name__ == '__main__':
     scheduler = partial(PolyLR, power=2.0, max_epoch=scheduler_iterations)
     batch_scheduler = True
     criterion = BootstrappedCrossEntropyLoss(ignore_index=255)
-    model = partial(hyperseg_efficientnet, 'efficientnet-b1', pretrained=pretrained, levels=2,
-                    kernel_sizes=(1, 1, 1, 3, 3), level_channels=[64, 32, 16, 16, 16], expand_ratio=2,
-                    inference_hflip=True, with_out_fc=False, decoder_dropout=None, weight_groups=[64, 32, 32, 16, 8],
+    model = partial(hyperseg_efficientnet, 'efficientnet-b1',
+                    pretrained=pretrained, levels=2,
+                    kernel_sizes=(1, 1, 1, 3, 3),
+                    level_channels=[64, 32, 16, 16, 16], expand_ratio=2,
+                    inference_hflip=True, with_out_fc=False,
+                    decoder_dropout=None, weight_groups=[64, 32, 32, 16, 8],
                     coords_res=[(576, 576), (576, 768)])
 
     os.chdir(project_dir)
     os.makedirs(exp_dir, exist_ok=True)
-    main(exp_dir, train_dataset=train_dataset, val_dataset=val_dataset, train_img_transforms=train_img_transforms,
+    main(exp_dir, train_dataset=train_dataset, val_dataset=val_dataset,
+         train_img_transforms=train_img_transforms,
          val_img_transforms=val_img_transforms, tensor_transforms=tensor_transforms, epochs=epochs,
          train_iterations=train_iterations, batch_size=batch_size, workers=workers, optimizer=optimizer,
          scheduler=scheduler, pretrained=pretrained, model=model, criterion=criterion, batch_scheduler=batch_scheduler)
